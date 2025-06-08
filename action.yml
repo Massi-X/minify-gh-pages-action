@@ -1,9 +1,25 @@
-name: 'Pages Minify'
-description: 'Minify js, css, and html files for GitHub pages'
+name: 'Minify GitHub Pages'
+description: 'Minify js, css, and html files for GitHub pages before publishing'
+author: 'Massi-X'
+
+inputs:
+  source:
+    description: 'Directory where the source files reside. This should be the dir where jekyll outputs to.'
+    required: false
+    default: ./_site/
+  compress:
+    description: 'Which files to compress. Choose between js, css and html or a combination of them, comma separated.'
+    required: false
+    default: js,css,html
+  js_options:
+    description: 'JS compressor options. See https://github.com/mishoo/UglifyJS/tree/harmony for the full list.'
+    required: false
+    default: '{"mangle": false}'
+  
 runs:
   using: 'docker'
   image: 'Dockerfile'
 
 branding:
-  icon: "minimize-2"
-  color: "blue"
+  icon: "trending-down"
+  color: "gray-dark"

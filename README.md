@@ -1,33 +1,14 @@
-# Minify Action
-[![GitHub release](https://img.shields.io/github/release/DrA1ex/minify-action.svg?color=orange)](https://gitHub.com//minify-action/releases/)
-[![MIT license](https://img.shields.io/github/license/anthonyftwang/minify-action.svg?color=blue)](https://github.com/anthonyftwang/minify-action/blob/master/LICENSE)
+# Minify GitHub Pages
+[![GitHub release](https://img.shields.io/github/release/Massi-X/minify-gh-pages-action.svg?color=orange)](https://github.com/marketplace/actions/minify-github-pages)
+[![MIT license](https://img.shields.io/github/license/Massi-X/minify-gh-pages-action.svg?color=blue)](https://github.com/Massi-X/minify-gh-pages-action/blob/master/LICENSE)
 
-This is an **updated** version of original [repository](https://github.com/anthonyftwang/minify-action).
+Github Action to minify js, css, and html files for GitHub Pages, using the [node-minify](https://node-minify.2clics.net/introduction/) package.
 
-Github Action to minify js, css, and html files pushed to a branch, using the [Minify](https://github.com/coderaiser/minify) package.
-
-### Versions
-- Node.js v18.12.1
-- Minify v9.1.0
+### Why did I build this?
+No action I found on the marketplace worked reliably (or at all) producing broken artifacts for GitHub pages. This pavkage aims to keep high compatibility and updated dependencies.
 
 ### Usage
-1. Optinal: create [.minify.json](https://github.com/coderaiser/minify#options) in root folder
-```json
-{
-    "html": {
-        "removeAttributeQuotes": false
-    },
-    "css": {
-        "compatibility": "*"
-    },
-    "js": {
-        "ecma": 2020,
-        "module": true
-    }
-}
-```
-
-2. Add `minify` step right after checkout in default [GitHub Pages build](https://docs.github.com/ru/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#creating-a-custom-github-actions-workflow-to-publish-your-site) action
+Add `minify` step right `Build with Jekyll` in default [GitHub Pages build](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages) action
 ```yaml
 # ...
 
@@ -36,9 +17,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Minify Action
-        uses: dra1ex/minify-action@v1.0.3
+      - name: Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+      - name: Minify
+        uses: Massi-X/minify-gh-pages-action@v1
 # ...
 ```
+
+### Options
+The package currently support a few options:
+|Option|Default|Required|Meaning|
+| -------- | ------- | -------- | ------- |
+|source|./_site/|false|Jekyll output directory. Should be the same as Jekyll 'destination'|
+|compress|js,css,html|false|File types to compress, comma separated|
+|js_options|'{"mangle": false}'|false|Options for js compressor from the ones available [here](https://github.com/mishoo/UglifyJS/tree/harmony)|

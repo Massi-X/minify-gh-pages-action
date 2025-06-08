@@ -1,10 +1,33 @@
-#!/bin/sh -l
+#!/bin/bash -l
 
-npm i minify@9.1.0 -g
-apt-get update
-apt-get -y install moreutils
+npm i @node-minify/cli -g
+npm i @node-minify/uglify-es -g
+npm i @node-minify/clean-css -g
+npm i @node-minify/html-minifier -g
 
-find . -type f \( -iname \*.html -o -iname \*.js -o -iname \*.css \) | while read fname
-    do
-    minify ${fname} | sponge ${fname}
-    done
+SOURCE_DIRECTORY=${GITHUB_WORKSPACE}/$INPUT_SOURCE
+
+echo "Source set to $SOURCE_DIRECTORY"
+echo "Compress set to $INPUT_COMPRESS"
+echo "JS options set to $INPUT_JS_OPTIONS"
+
+if [[ $INPUT_COMPRESS == *"js"* ]]; then
+    find ./_site/. -type f -iname \*.js | while read fname
+        do
+        node-minify --input ${fname} --compressor uglify-es --output ${fname} --option "$INPUT_JS_OPTIONS"
+        done
+fi
+
+if [[ $INPUT_COMPRESS == *"css"* ]]; then
+    find ./_site/. -type f -iname \*.css | while read fname
+        do
+        node-minify --input ${fname} --compressor clean-css --output ${fname}
+        done
+fi
+
+if [[ $INPUT_COMPRESS == *"html"* ]]; then
+    find ./_site/. -type f -iname \*.html | while read fname
+        do
+        node-minify --input ${fname} --compressor html-minifier --output ${fname}
+        done
+fi
