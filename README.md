@@ -5,7 +5,7 @@
 Github Action to minify js, css, and html files for GitHub Pages, using the [node-minify](https://node-minify.2clics.net/introduction/) package.
 
 ### Why did I build this?
-No action I found on the marketplace worked reliably (or at all) producing broken artifacts for GitHub pages. This pavkage aims to keep high compatibility and updated dependencies.
+No action I found on the marketplace worked reliably (or at all) producing broken artifacts for GitHub pages. This package aims to keep high compatibility and updated dependencies.
 
 ### Usage
 Add `minify` step right `Build with Jekyll` in default [GitHub Pages build](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages) action
