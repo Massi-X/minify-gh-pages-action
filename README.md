@@ -23,7 +23,7 @@ jobs:
           source: ./
           destination: ./_site
       - name: Minify
-        uses: Massi-X/minify-gh-pages-action@v1
+        uses: Massi-X/minify-gh-pages-action@v2
 # ...
 ```
 
@@ -33,4 +33,15 @@ The package currently support a few options:
 | -------- | ------- | -------- | ------- |
 |source|./_site/|false|Jekyll output directory. Should be the same as Jekyll 'destination'|
 |compress|js,css,html|false|File types to compress, comma separated|
-|js_options|'{"mangle": false}'|false|Options for js compressor from the ones available [here](https://github.com/mishoo/UglifyJS/tree/harmony)|
+|js_options|'{"mangle": false}'|false|Options for js compressor from the ones available [here](https://github.com/mishoo/UglifyJS)|
+|css_options|'{}'|false|Options for css compressor from the ones available [here](https://github.com/clean-css/clean-css)|
+|html_options|'{"collapseInlineTagWhitespace": false}'|false|Options for html compressor from the ones available [here](https://github.com/kangax/html-minifier)|
+
+### Donation
+If you like to support me, you can donate. Any help is greatly appreciated. Thank you!
+
+<a target="_blank" href="https://paypal.me/firemetris"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" alt="paypal"/></a>
+
+**Bitcoin:** 1Pig6XJxXGBj1v3r6uLrFUSHwyX8GPopRs
+
+**Monero:** 89qdmpDsMm9MUvpsG69hbRMcGWeG2D26BdATw1iXXZwi8DqSEstJGcWNkenrXtThCAAJTpjkUNtZuQvxK1N5xSyb18eXzPD

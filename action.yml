@@ -12,9 +12,17 @@ inputs:
     required: false
     default: js,css,html
   js_options:
-    description: 'JS compressor options. See https://github.com/mishoo/UglifyJS/tree/harmony for the full list.'
+    description: 'JS compressor options. See https://github.com/mishoo/UglifyJS for the full list.'
     required: false
     default: '{"mangle": false}'
+  css_options:
+    description: 'CSS compressor options. See https://github.com/clean-css/clean-css for the full list.'
+    required: false
+    default: '{}'
+  html_options:
+    description: 'HTML compressor options. See https://github.com/kangax/html-minifier for the full list.'
+    required: false
+    default: '{"collapseInlineTagWhitespace": false}'
   
 runs:
   using: 'docker'
